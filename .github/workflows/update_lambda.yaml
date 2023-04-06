@@ -6,6 +6,7 @@ on:
       - 'functions/**'
       - 'requirements.txt'
       - '.github/workflows/update_lambda.yaml'
+      - 'infra/**'
 
 jobs:
   deploy:
