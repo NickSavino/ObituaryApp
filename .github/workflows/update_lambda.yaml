@@ -1,6 +1,10 @@
 name: Update Lambda
 
-on: [push]
+on: 
+  push:
+    paths:
+      - 'functions/**'
+      - 'requirements.txt'
 
 jobs:
   deploy:
@@ -20,6 +24,7 @@ jobs:
           mkdir ./package && pip install -r requirements.txt -t ./package
           cd package && zip -r9 ../artifact.zip .
           cd ../functions/create-obituary && zip -g ../../artifact.zip create_obituary.py
+          cd ../get-obituaries && zip -g ../../artifact.zip get_obituaries.py
 
 
       - name: Configure AWS Credentials
@@ -32,7 +37,7 @@ jobs:
       - name: Upload to S3
         run: aws s3 cp artifact.zip s3://${{ env.BUCKET }}/artifact.zip
 
-      - name: Updating Lambda
+      - name: Updating create-obituary lambda
         uses: masoudkarimif/gh-action-lambda-update-slack@main
         with:
           s3_bucket: ${{ env.BUCKET }}
@@ -41,3 +46,13 @@ jobs:
           aws_region: ca-central-1
           env: PROD
           function_name: create_obituary
+
+      - name: Updating get-obituaries lambda
+        uses: masoudkarimif/gh-action-lambda-update-slack@main
+        with:
+          s3_bucket: ${{ env.BUCKET }}
+          s3_key: artifact.zip
+          code_path: ./artifact.zip
+          aws_region: ca-central-1
+          env: PROD
+          function_name: get_obituaries

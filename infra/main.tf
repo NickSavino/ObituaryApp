@@ -175,3 +175,4 @@ resource "aws_lambda_function_url" "get-obituaries-url" {
 output "get_url" {
   value = aws_lambda_function_url.get-obituaries-url.function_url
 }
+
