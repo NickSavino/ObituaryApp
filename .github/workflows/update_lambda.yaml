@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir ./package && pip install -r requirements.txt -t ./package
           cd package && zip -r9 ../artifact.zip .
-          cd ../functions/create_obituary && zip -g ../../artifact.zip create_obituary.py
+          cd ../functions/create-obituary && zip -g ../../artifact.zip create_obituary.py
 
 
       - name: Configure AWS Credentials
