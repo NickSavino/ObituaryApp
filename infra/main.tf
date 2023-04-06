@@ -176,3 +176,46 @@ output "get_url" {
   value = aws_lambda_function_url.get-obituaries-url.function_url
 }
 
+# create a dynamodb table
+resource "aws_dynamodb_table" "obituary-table" {
+  name = "obituary-table-30129329"
+  billing_mode = "PROVISIONED"
+
+     # up to 8KB read per second (eventually consistent)
+  read_capacity = 1
+
+  # up to 1KB per second
+  write_capacity = 1
+
+  hash_key = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+}
+
+#create a policy document that allows the lambda to access the dynamodb table
+data "aws_iam_policy_document" "dynamodb" {
+    statement {
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+    ]
+
+    resources = [
+      aws_dynamodb_table.obituary-table.arn
+    ]
+  }
+}
+
+resource "aws_iam_policy" "dynamodb" {
+  name = "AmazonDynamoDBAccess"
+  description = "IAM policy for accessing the obituary database"
+  policy = data.aws_iam_policy_document.dynamodb.json
+}
+
+resource "aws_iam_role_policy_attachment" "dynamodb" {
+  role = aws_iam_role.lambda.name
+  policy_arn = aws_iam_policy.dynamodb.arn
+}
