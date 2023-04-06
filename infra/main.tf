@@ -57,8 +57,8 @@ resource "aws_iam_user_policy" "user" {
 # local variables
 locals {
   lambda_group                   = "obituary-lambdas"
-  get_obituaries_name            = "get_obituary"
-  get_obituaries_handler_name    = "get_obituary.handler"
+  get_obituaries_name            = "get_obituaries"
+  get_obituaries_handler_name    = "get_obituaries.handler"
   create_obituaries_name         = "create_obituary"
   create_obituaries_handler_name = "create_obituary.handler"
   artifact_name                  = "artifact.zip"
