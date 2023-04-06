@@ -5,6 +5,7 @@ on:
     paths:
       - 'functions/**'
       - 'requirements.txt'
+      - '.github/workflows/update_lambda.yaml'
 
 jobs:
   deploy:
