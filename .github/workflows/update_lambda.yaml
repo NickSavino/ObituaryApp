@@ -21,6 +21,7 @@ jobs:
       - name: list files
         run: ls
 
+      # rezips the code into a single file along with the dependencies
       - name: create deployment package
         run: |
           mkdir ./package && pip install -r requirements.txt -t ./package
@@ -29,6 +30,7 @@ jobs:
           cd ../get-obituaries && zip -g ../../artifact.zip get_obituaries.py
 
 
+      #configure credentials using github secrets
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -36,9 +38,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ca-central-1
 
+      #uploads the artifact to s3
       - name: Upload to S3
         run: aws s3 cp artifact.zip s3://${{ env.BUCKET }}/artifact.zip
 
+
+      #updates the lambda function
       - name: Updating create-obituary lambda
         uses: masoudkarimif/gh-action-lambda-update-slack@main
         with:
@@ -49,6 +54,8 @@ jobs:
           env: PROD
           function_name: create_obituary
 
+
+      #updates the lambda function
       - name: Updating get-obituaries lambda
         uses: masoudkarimif/gh-action-lambda-update-slack@main
         with:
