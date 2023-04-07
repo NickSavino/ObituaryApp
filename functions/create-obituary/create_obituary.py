@@ -12,6 +12,7 @@ cloudinary_keys = ssm.get_parameters_by_path(
     WithDecryption=True
 )
 
+print(cloudinary_keys)
 
 def handler(event, context):
     # TODO implement
