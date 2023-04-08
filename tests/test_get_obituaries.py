@@ -10,5 +10,5 @@ def test_get_obituaries_handler():
 
     response = handler(event, context)    
     print(response)
-
-    assert response["statusCode"] == 200
+    print(json.loads(response['statusCode']))
+    assert json.loads(response['statusCode']) == 200

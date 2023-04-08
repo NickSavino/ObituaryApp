@@ -8,8 +8,9 @@ import { useState } from 'react';
 function App() {
   
   const [cards, setCards] = useState([]);
-
+  const [cardsData, setCardsData] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  
   
 
   async function submitObituaryData (obituaryData) {
