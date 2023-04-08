@@ -38,13 +38,13 @@ def handler(event, context):
     print("EVENT --- ")
 
     # get the body and content type
-    content_type = json.loads(event['headers']['content-type'])
+    content_type = event['headers']['content-type']
     print("CONTENT TYPE ---")
     print(content_type)
-    body = json.loads(event['body'])
+    body = event['body']
 
     # parse the body
-    multipart_data = MultipartDecoder.from_response(body, content_type, boundary=42)
+    multipart_data = MultipartDecoder.from_response(body, content_type)
     print("MULTIPART DATA ---")
     print(multipart_data)
 
