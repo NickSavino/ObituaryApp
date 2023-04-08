@@ -116,7 +116,7 @@ resource "aws_iam_policy" "polly-access-policy" {
       {
         Effect = "Allow"
         Action = "polly:SynthesizeSpeech"
-        Resource = "arn:aws:polly:ca-central-1:214547864366:lexicon/*"
+        Resource = "*"
       }
     ]
   })
