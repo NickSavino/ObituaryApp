@@ -12,10 +12,12 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   
 
-  const submitObituaryData = async (obituaryData) => {
+  async function submitObituaryData (obituaryData) {
     const url = "https://oadio4xsdvk5e7msjgft2gnhgy0aiggs.lambda-url.ca-central-1.on.aws/"
 
     const formData = new FormData();
+
+    console.log("Obituary Data: " + obituaryData)
 
     formData.append("name", obituaryData.name);
     formData.append("birthYear", obituaryData.birthYear);
@@ -23,13 +25,15 @@ function App() {
     formData.append("img", obituaryData.img);
     
 
-    console.log("FORM DATA: " + JSON.stringify(formData))
+    console.log("FORM DATA: " + formData)
 
     try {
       const response = await fetch(url, {
         method: "POST",
-
-        body: JSON.stringify(formData),
+        headers: {
+          "accept": "*/*",
+        },
+        body: formData,
     });
 
     console.log(response)
