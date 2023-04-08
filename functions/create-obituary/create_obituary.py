@@ -43,10 +43,12 @@ def handler(event, context):
     print(content_type)
     body = base64.b64decode(event['body'])
 
+    boundary = event['headers']['content-length']
+    print("BOUNDARY ---")
+    print(boundary)
     
-
     # parse the body
-    multipart_data = MultipartDecoder(body, content_type)
+    multipart_data = MultipartDecoder(body, content_type, boundary=boundary)
     print("MULTIPART DATA ---")
     print(multipart_data)
 
