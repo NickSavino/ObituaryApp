@@ -30,9 +30,11 @@ function App() {
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status}`);
       }
+      
 
       const responseData = await response.json();
       console.log("Response Data: ", responseData);
+      setCardsData(responseData);
     } catch (error) {
       console.error("Error: ", error);
     }

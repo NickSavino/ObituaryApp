@@ -1,6 +1,6 @@
 import CardItem from "./CardItem";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function ObituaryCards({ cardsData }) {
@@ -11,6 +11,7 @@ function ObituaryCards({ cardsData }) {
 
     const [currentAudio, setCurrentAudio] = useState(null);
 
+    const [cards, setCards] = useState([]);
 
     const playAudio = (audio) => {
 
@@ -24,20 +25,22 @@ function ObituaryCards({ cardsData }) {
         setCurrentAudio(playableAudio);
     }
 
-    const cards = cardsData.map((card) => (
-        <CardItem
-          key={card.id}
-          title={card.title}
-          birthYear={card.birthYear}
-          deathYear={card.deathYear}
-          text={card.text}
-          img={card.image_url}
-          audio={card.audio_url}
-          playAudio={playAudio}
-        />
-      ));
+    useEffect(() => {
+        const newCards = cardsData.map((card) => {
+            return (<CardItem
+              key={card.id}
+              name={card.name}
+              birthYear={card.birthYear}
+              deathYear={card.deathYear}
+              text={card.obituary_text}
+              img={card.image_url}
+              audio={card.audio_url}
+              playAudio={playAudio}
+            />);
+        });
+        setCards(newCards);
     
-
+    }, [cardsData]);
 
 
     

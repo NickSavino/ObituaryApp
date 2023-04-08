@@ -21,6 +21,8 @@ def handler(event, context):
         response_item = {
             'id': item['id']['S'],
             'name': item['name']['S'],
+            'birth_year': item['birth_year']['S'],
+            'death_year': item['death_year']['S'],
             'obituary_text': item['obituary_text']['S'],
             'image_url': item['image_url']['S'],
             'audio_url': item['audio_url']['S']
