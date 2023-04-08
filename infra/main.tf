@@ -242,7 +242,7 @@ resource "aws_dynamodb_table" "obituary-table" {
 data "aws_iam_policy_document" "dynamodb" {
   statement {
     actions = [
-      "dynamodb:GetItem",
+      "dynamodb:Scan",
       "dynamodb:PutItem",
     ]
 

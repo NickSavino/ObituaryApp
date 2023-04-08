@@ -1,7 +1,7 @@
 import './CardItem.css'
 
 
-function CardItem({ title, text, date, img, audio, playAudio}) {
+function CardItem({ title, text, birthYear, deathYear, img, audio, playAudio}) {
 
 
 

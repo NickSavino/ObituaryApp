@@ -28,6 +28,8 @@ function ObituaryCards({ cardsData }) {
         <CardItem
           key={card.id}
           title={card.title}
+          birthYear={card.birthYear}
+          deathYear={card.deathYear}
           text={card.text}
           img={card.image_url}
           audio={card.audio_url}
@@ -36,7 +38,6 @@ function ObituaryCards({ cardsData }) {
       ));
     
 
-    cards.push(<CardItem title={"Desmond O'brien, Second Era Grand Wizard"} text={text} img={image_url} audio={audio_url} playAudio={playAudio}></CardItem>)
 
 
     
