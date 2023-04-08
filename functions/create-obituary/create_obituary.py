@@ -72,7 +72,7 @@ def handler(event, context):
 
         obituary_data[field_name] = part.text
 
-        if field_name == "file":
+        if field_name == "img":
             print("IMAGE DATA ---")
             print(part.content)
             image_data = part.content
@@ -81,7 +81,7 @@ def handler(event, context):
     print(obituary_data)
     
     # generate the obituary text
-    obituary_text = generate_obituary(**obituary_data)
+    obituary_text = generate_obituary(obituary_data['name'], obituary_data['birthYear'], obituary_data['deathYear'])
 
     # convert the text to speech
     audio_data = text_to_speech(obituary_text)
