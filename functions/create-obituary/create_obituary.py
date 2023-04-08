@@ -59,7 +59,7 @@ def handler(event, context):
     # loop through the parts of the body
     for part in multipart_data.parts:
         print(part.headers)
-        content_disposition = part.headers[b'Content-Disposition']
+        content_disposition = part.headers[b'Content-Disposition'].decode()
         field_name = content_disposition.split(';')[1].split('=')[1].replace('"', '')
         
         if field_name == "file":
@@ -67,6 +67,8 @@ def handler(event, context):
         else:
             obituary_data[field_name] = part.text
 
+    print("OBITUARY DATA ---")
+    print(obituary_data)
     
     # generate the obituary text
     obituary_text = generate_obituary(**obituary_data)
