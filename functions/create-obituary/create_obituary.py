@@ -53,6 +53,7 @@ def handler(event, context):
 
     # loop through the parts of the body
     for part in multipart_data.parts:
+        print(part.headers)
         content_disposition = part.headers[b'Content-Disposition'].decode('utf-8')
         field_name = content_disposition.split(';')[1].split('=')[1].replace('"', '')
         
