@@ -1,0 +1,125 @@
+.form {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .heading {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    align-items: center;
+    padding: 15px;
+}
+
+.cancel-button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    
+    margin-top: 0.5rem;
+
+    background-color: transparent;
+    border: transparent;
+}
+
+.cancel-button > img {
+    width: 64px;
+    height: 64px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 8%;
+    margin-bottom: 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-group #name {
+    min-width: 100%;
+    
+    width: 100%;
+    height: 100%;
+    border: 1px solid #2ccca8;
+    border-radius: 10px;
+    padding: 2rem 0 2rem 1rem;
+    font-size: 150%;
+}
+
+
+.form-group #name:focus {
+    outline: none;
+}
+
+.form-group #name::placeholder {
+    color: #808080;
+    opacity: 0.4;
+}
+
+.form-group #deceased-label {
+    margin-bottom: 5px;
+
+}
+
+.form-group #deceased-label:hover {
+    margin-bottom: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+.birth-death {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.birth-death > div {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid;
+    height: 100%;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.birth-death > div > * {
+    display: flex;
+    width: fit-content;
+    border: none;
+    font-size: 125%;
+    margin: 1px;
+}
+
+
+
+
+.submit-obituary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 31%;
+    height: 8%;
+    background-color: #2ccca8;
+    color: white;
+    border: transparent;
+    border-radius: 10px;
+  }

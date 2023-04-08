@@ -35,7 +35,7 @@ def fetch_keys():
     return keys
 
 def handler(event, context):
-    
+    print(event)
     # get the body and content type
     content_type = event['headers']['Content-Type']
     body = event['body']

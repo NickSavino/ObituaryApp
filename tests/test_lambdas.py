@@ -32,6 +32,7 @@ def test_create_obituary_handler():
         "body": multipart_data.to_string()
     }
     context = None
+    print(event)
 
     response = handler(event, context)    
     print(response)
