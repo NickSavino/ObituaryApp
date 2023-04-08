@@ -36,12 +36,14 @@ def fetch_keys():
 
 def handler(event, context):
     print("EVENT --- ")
-
+    print(event)
     # get the body and content type
     content_type = event['headers']['content-type']
     print("CONTENT TYPE ---")
     print(content_type)
     body = base64.b64decode(event['body'])
+
+    
 
     # parse the body
     multipart_data = MultipartDecoder(body, content_type)
