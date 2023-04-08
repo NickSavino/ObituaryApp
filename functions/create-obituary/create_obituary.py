@@ -62,6 +62,11 @@ def handler(event, context):
         content_disposition = part.headers[b'Content-Disposition'].decode()
         field_name = content_disposition.split(';')[1].split('=')[1].replace('"', '')
         
+        print("CONTENT DISPOSITION ---")
+        print(content_disposition)
+        print("FIELD NAME ---")
+        print(field_name)
+
         if field_name == "file":
             image_data = part.content
 
