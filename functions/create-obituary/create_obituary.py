@@ -6,6 +6,7 @@ from requests_toolbelt.multipart.decoder import MultipartDecoder
 import time
 import hashlib
 import base64
+import uuid
 
 ssm = boto3.client('ssm')
 polly = boto3.client('polly')
@@ -97,10 +98,22 @@ def handler(event, context):
     print(image_response)
     print(audio_response)
 
+    image_url = image_response['secure_url']
+    audio_url = audio_response['secure_url']
+
+    upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url)
+
     return {
         "statusCode": 200,
         "body": json.dumps({
             "message": "obituary created",
+            "name": obituary_data['name'],
+            "birth_year": obituary_data['birthYear'],
+            "death_year": obituary_data['deathYear'],
+            "obituary_text": obituary_text,
+            "image_url": image_url,
+            "audio_url": audio_url,
+            
         }),
     }
         
@@ -185,3 +198,44 @@ def upload_to_cloudinary(image_data, speech_data):
 
     return image_response.json(), speech_response.json()
  
+
+def upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url):
+    """
+    Uploads the obituary data to DynamoDB
+
+    Parameters
+    ----------
+    obituary_data : dict
+        The obituary data
+    obituary_text : str
+        The obituary text
+    image_url : str
+        The url of the image
+    audio_url : str
+        The url of the audio
+
+    Returns
+    -------
+    None.
+    """
+
+    # Create the DynamoDB client
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('obituary-table-30129329')
+    
+    # Create the item, using a UUID for the primary key
+    item = {
+        'id': str(uuid.uuid4()),
+        'name': obituary_data['name'],
+        'birth_year': obituary_data['birthYear'],
+        'death_year': obituary_data['deathYear'],
+        'obituary_text': obituary_text,
+        'image_url': image_url,
+        'audio_url': audio_url,
+    }
+
+    # Write the item to the table
+    table.put_item(Item=item)
+
+
+    return 'Successfully added item to table'
