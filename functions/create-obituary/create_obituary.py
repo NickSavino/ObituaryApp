@@ -73,7 +73,7 @@ def handler(event, context):
 
         if field_name == "img":
             print("IMAGE DATA ---")
-            print(part.decode())
+            print(part.content)
             image_data = part.content
         else:
             obituary_data[field_name] = part.text
