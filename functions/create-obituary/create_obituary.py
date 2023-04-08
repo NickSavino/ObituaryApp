@@ -12,7 +12,7 @@ ssm = boto3.client('ssm')
 polly = boto3.client('polly')
 
 
-max_tokens = 100
+max_tokens = 1000
 
 
 def fetch_keys():
@@ -126,7 +126,7 @@ def generate_obituary(name, birth_year, death_year):
     headers = { 'Authorization': f"Bearer {fetch_keys()['/chatgpt/secretkey']}" }
 
     data = {
-        "model": "text-ada-001",
+        "model": "text-curie-001",
         "prompt": prompt,
         "max_tokens": max_tokens,
     }
