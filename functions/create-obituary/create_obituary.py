@@ -35,11 +35,13 @@ def fetch_keys():
     return keys
 
 def handler(event, context):
-    print("EVENT --- " + event)
+    print("EVENT --- ")
+    print(event)
 
     # get the body and content type
     content_type = event['headers']['content-type']
-    print("CONTENT-TYPE --- " + content_type)
+    print("CONTENT TYPE ---")
+    print(content_type)
     body = event['body']
 
     # parse the body

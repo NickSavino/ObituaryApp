@@ -30,7 +30,7 @@ function App() {
         headers: {
           "content-type": "multipart/content-type",
         },
-        body: formData,
+        body: JSON.stringify(formData),
     });
 
     console.log(response)
