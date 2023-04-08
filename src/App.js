@@ -28,9 +28,7 @@ function App() {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers: {
-          "content-type": "multipart/form-data",
-        },
+
         body: JSON.stringify(formData),
     });
 
