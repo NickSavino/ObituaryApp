@@ -70,12 +70,14 @@ def handler(event, context):
         print("FIELD NAME ---")
         print(field_name)
 
-        obituary_data[field_name] = part.text
 
         if field_name == "img":
             print("IMAGE DATA ---")
-            print(part.content)
+            print(part)
             image_data = part.content
+        else:
+            obituary_data[field_name] = part.text
+
 
     print("OBITUARY DATA ---")
     print(obituary_data)
