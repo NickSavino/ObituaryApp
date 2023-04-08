@@ -84,6 +84,28 @@ resource "aws_iam_role" "lambda" {
 EOF
 }
 
+resource "aws_iam_policy" "ssm_access_policy" {
+  name   = "ssm-access-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "ssm:GetParametersByPath"
+        Resource = "arn:aws:ssm:ca-central-1:214547864366:parameter/*"
+      }
+    ]
+  })
+}
+
+
+resource "aws_iam_role_policy_attachment" "lambda-ssm-access" {
+  role       = aws_iam_role.lambda.name
+  policy_arn = aws_iam_policy.ssm_access_policy.arn
+}
+
+
 
 #create-obituary lambda
 resource "aws_lambda_function" "create-obituary" {
@@ -178,10 +200,10 @@ output "get_url" {
 
 # create a dynamodb table
 resource "aws_dynamodb_table" "obituary-table" {
-  name = "obituary-table-30129329"
+  name         = "obituary-table-30129329"
   billing_mode = "PROVISIONED"
 
-     # up to 8KB read per second (eventually consistent)
+  # up to 8KB read per second (eventually consistent)
   read_capacity = 1
 
   # up to 1KB per second
@@ -197,7 +219,7 @@ resource "aws_dynamodb_table" "obituary-table" {
 
 #create a policy document that allows the lambda to access the dynamodb table
 data "aws_iam_policy_document" "dynamodb" {
-    statement {
+  statement {
     actions = [
       "dynamodb:GetItem",
       "dynamodb:PutItem",
@@ -210,13 +232,13 @@ data "aws_iam_policy_document" "dynamodb" {
 }
 
 resource "aws_iam_policy" "dynamodb" {
-  name = "AmazonDynamoDBAccess"
+  name        = "AmazonDynamoDBAccess"
   description = "IAM policy for accessing the obituary database"
-  policy = data.aws_iam_policy_document.dynamodb.json
+  policy      = data.aws_iam_policy_document.dynamodb.json
 }
 
 resource "aws_iam_role_policy_attachment" "dynamodb" {
-  role = aws_iam_role.lambda.name
+  role       = aws_iam_role.lambda.name
   policy_arn = aws_iam_policy.dynamodb.arn
 }
 
