@@ -36,16 +36,15 @@ def fetch_keys():
 
 def handler(event, context):
     print("EVENT --- ")
-    print(event)
 
     # get the body and content type
-    content_type = event['headers']['content-type']
+    content_type = json.loads(event['headers']['content-type'])
     print("CONTENT TYPE ---")
     print(content_type)
-    body = event['body']
+    body = json.loads(event['body'])
 
     # parse the body
-    multipart_data = MultipartDecoder.from_response(body, content_type)
+    multipart_data = MultipartDecoder.from_response(body, content_type, boundary=42)
     print("MULTIPART DATA ---")
     print(multipart_data)
 
