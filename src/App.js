@@ -15,19 +15,20 @@ function App() {
   const submitObituaryData = async (obituaryData) => {
     const url = "https://oadio4xsdvk5e7msjgft2gnhgy0aiggs.lambda-url.ca-central-1.on.aws/"
 
-    const formData = new FormData();
+    const formData = {
+      name: obituaryData.name,
+      birthYear: obituaryData.birthYear,
+      deathYear: obituaryData.deathYear,
+      img: obituaryData.img,
+    };
 
-    formData.append("name", obituaryData.name);
-    formData.append("birthYear", obituaryData.birthYear);
-    formData.append("deathYear", obituaryData.deathYear);
-    formData.append("img", obituaryData.img);
-
+    console.log("FORM DATA: " + JSON.stringify(formData))
 
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/content-type",
+          "content-type": "multipart/content-type",
         },
         body: formData,
     });
