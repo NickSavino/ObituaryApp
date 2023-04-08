@@ -64,8 +64,6 @@ def handler(event, context):
         
         if field_name == "file":
             image_data = part.content
-        else:
-            obituary_data[field_name] = part.text
 
     print("OBITUARY DATA ---")
     print(obituary_data)
