@@ -45,7 +45,9 @@ def handler(event, context):
     body = event['body']
 
     # parse the body
-    multipart_data = MultipartDecoder(body, content_type)
+    multipart_data = MultipartDecoder.from_response(body, content_type)
+    print("MULTIPART DATA ---")
+    print(multipart_data)
 
     # initialize variables
     obituary_data = {}
