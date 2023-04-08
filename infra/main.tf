@@ -84,6 +84,8 @@ resource "aws_iam_role" "lambda" {
 EOF
 }
 
+
+#create a policy for the lambda to access ssm
 resource "aws_iam_policy" "ssm_access_policy" {
   name   = "ssm-access-policy"
 
@@ -99,12 +101,31 @@ resource "aws_iam_policy" "ssm_access_policy" {
   })
 }
 
-
+#attach the above policy to the role
 resource "aws_iam_role_policy_attachment" "lambda-ssm-access" {
   role       = aws_iam_role.lambda.name
   policy_arn = aws_iam_policy.ssm_access_policy.arn
 }
 
+resource "aws_iam_policy" "polly-access-policy" {
+  name = "polly-access-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "polly:SynthesizeSpeech"
+        Resource = "arn:aws:polly:ca-central-1:214547864366:lexicon/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda-polly-access" {
+  role       = aws_iam_role.lambda.name
+  policy_arn = aws_iam_policy.polly-access-policy.arn
+}
 
 
 #create-obituary lambda
