@@ -58,6 +58,9 @@ def handler(event, context):
 
     # loop through the parts of the body
     for part in multipart_data.parts:
+        print("PART ---")
+        print(part)
+        print("PART HEADERS ---")
         print(part.headers)
         content_disposition = part.headers[b'Content-Disposition'].decode()
         field_name = content_disposition.split(';')[1].split('=')[1].replace('"', '')
@@ -67,7 +70,11 @@ def handler(event, context):
         print("FIELD NAME ---")
         print(field_name)
 
+        obituary_data[field_name] = part.text
+
         if field_name == "file":
+            print("IMAGE DATA ---")
+            print(part.content)
             image_data = part.content
 
     print("OBITUARY DATA ---")
