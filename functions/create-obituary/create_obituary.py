@@ -41,10 +41,10 @@ def handler(event, context):
     content_type = event['headers']['content-type']
     print("CONTENT TYPE ---")
     print(content_type)
-    body = event['body']
+    body = base64.b64decode(event['body'])
 
     # parse the body
-    multipart_data = MultipartDecoder.from_response(body, content_type)
+    multipart_data = MultipartDecoder(body, content_type)
     print("MULTIPART DATA ---")
     print(multipart_data)
 
