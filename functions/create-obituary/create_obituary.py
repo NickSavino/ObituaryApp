@@ -48,7 +48,7 @@ def handler(event, context):
     print(boundary)
 
     # parse the body
-    multipart_data = MultipartDecoder(body, content_type)
+    multipart_data = MultipartDecoder.from_response(event)
     print("MULTIPART DATA ---")
     print(multipart_data)
 
