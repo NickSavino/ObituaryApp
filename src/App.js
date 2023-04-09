@@ -10,9 +10,16 @@ function App() {
   const [cardsData, setCardsData] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   
+  const [activeGetRequest, setActiveGetRequest] = useState(false);
 
-  useEffect(() => {
-    fetchCards();
+    useEffect(() => {
+    setActiveGetRequest(true);
+    const fetch = async () => {
+      await fetchCards();
+    }
+    fetch();
+    setActiveGetRequest(false);
+
   }, []);
 
 
@@ -81,12 +88,13 @@ function App() {
   const handleSubmit = async (event) => {
     // Send ObituaryData to the Lambda function via lambda function url
     console.log(event)
-    // Close the form
-    setIsFormOpen(false)
+
     // Submit the form
     await submitObituaryData(event)
     // Fetch the cards again
     await fetchCards()
+    // Close the form
+    setIsFormOpen(false)
 
   };
 
@@ -109,7 +117,7 @@ function App() {
       </div>
 
       {isFormOpen == true ? (
-        <ObituaryForm onSubmit={handleSubmit} onCancel={handleFormCancel} />
+        <ObituaryForm onSubmit={handleSubmit} onCancel={handleFormCancel} activeGetRequest={activeGetRequest} />
       )
       :
       (

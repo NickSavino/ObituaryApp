@@ -3,8 +3,6 @@ import './CardItem.css'
 
 function CardItem({ name,  birthYear, deathYear, text, img, audio, playAudio}) {
 
-
-
     return (
         <div className="card">
             <img src={img} alt="random" />

@@ -9,6 +9,7 @@ function ObituaryForm({ onSubmit, onCancel }) {
   const [deathYear, setDeathYear] = useState("")
   const [img, setImg] = useState("")
 
+  const [fetching, setFetching] = useState(false)
 
   const options = {
     year: "numeric",
@@ -27,8 +28,11 @@ const formatDate = (date) => {
     return formatted;
 };
 
-  const handleSubmit = (event) => {
+
+    // Handle form submission
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
 
     if (img == "") {
         alert("Please upload a photo of the deceased")
@@ -40,7 +44,9 @@ const formatDate = (date) => {
         return
     }
 
-    onSubmit({ name, birthYear, deathYear, img })
+    setFetching(true)
+    await onSubmit({ name, birthYear, deathYear, img })
+    setFetching(false)
   }
 
   const handleImgChange = (event) => {
@@ -50,10 +56,13 @@ const formatDate = (date) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-
+        
+        { // Removes the cancel button when the form is submitting
+        !fetching && 
         <button className="cancel-button" onClick={onCancel}>
             <img src="./images/exitForm.svg" alt="No Image"/>
-        </button>
+        </button>}
+     
 
         <div className="heading">
             <h1>Create a New Obituary</h1>
@@ -79,7 +88,7 @@ const formatDate = (date) => {
                     <label htmlFor="birth-year"><em>Born:</em></label>
                     <input 
                         id="birth-year" 
-                        type="datetime-local" 
+                        type="date" 
                         defaultValue={birthYear}  
                         onChange={(e) => setBirthYear(formatDate(e.target.value))}
                     />
@@ -89,7 +98,7 @@ const formatDate = (date) => {
                     <label htmlFor="death-year"><em>Died:</em></label>
                     <input 
                         id="death-year" 
-                        type="datetime-local" 
+                        type="date" 
                         defaultValue={deathYear}
                         onChange={(e) => setDeathYear(formatDate(e.target.value))}
                     />
@@ -98,7 +107,16 @@ const formatDate = (date) => {
             </div>
         </div>
 
-        <button type="submit" className="submit-obituary">Write Obituary</button>
+        {
+            fetching == false ? (
+                <button type="submit" className="submit-obituary">Write Obituary</button>
+            ) : (
+                <>
+                <div>Please Wait. It's not like they're gonna be late for something...</div>
+                <div id="loading-bar-spinner" className="spinner"><div className="spinner-icon"></div></div>
+                </>
+            )
+        }
 
     </form>
   )

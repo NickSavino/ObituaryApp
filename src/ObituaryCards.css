@@ -1,7 +1,48 @@
 
 .obituary-cards {
+
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    overflow-y: auto;
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 1.3rem;
+    grid-auto-rows: minmax(100px, auto);
   }
+
+  .no-obituary-cards {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  
+  @media (max-width: 670px) {
+    .obituary-cards {
+      justify-content: center;
+    }
+  }
+
+
+  #fetch-bar-spinner.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 19 !important;
+    animation: fetch-bar-spinner 400ms linear infinite;
+}
+
+#fetch-bar-spinner.spinner .spinner-icon {
+    width: 80px;
+    height: 80px;
+    border:  solid 4px transparent;
+    border-top-color:  #00C8B1 !important;
+    border-left-color: #00C8B1 !important;
+    border-radius: 50%;
+}
+
+@keyframes fetch-bar-spinner {
+  0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
