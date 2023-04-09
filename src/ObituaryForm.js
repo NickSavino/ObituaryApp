@@ -4,7 +4,7 @@ import "./ObituaryForm.css"
 
 function ObituaryForm({ onSubmit, onCancel }) {
 
-  const [name, setName] = useState("Name of the deceased")
+  const [name, setName] = useState("")
   const [birthYear, setBirthYear] = useState("")
   const [deathYear, setDeathYear] = useState("")
   const [img, setImg] = useState("")
@@ -29,6 +29,17 @@ const formatDate = (date) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    if (img == "") {
+        alert("Please upload a photo of the deceased")
+        return
+    }
+
+    if (name == "" || birthYear == "" || deathYear == "") {
+        alert("Please fill out all fields")
+        return
+    }
+
     onSubmit({ name, birthYear, deathYear, img })
   }
 

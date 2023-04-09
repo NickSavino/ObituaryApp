@@ -78,11 +78,16 @@ function App() {
   }
 };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // Send ObituaryData to the Lambda function via lambda function url
     console.log(event)
-    submitObituaryData(event)
+    // Close the form
     setIsFormOpen(false)
+    // Submit the form
+    await submitObituaryData(event)
+    // Fetch the cards again
+    await fetchCards()
+
   };
 
   const handleFormCancel = () => {
