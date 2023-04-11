@@ -1,16 +1,24 @@
+import { useState } from 'react';
 import './CardItem.css'
 
 
 function CardItem({ name,  birthYear, deathYear, text, img, audio, playAudio}) {
 
+    const [isExpanded, setIsExpanded] = useState(false);
+
+
     return (
-        <div className="card">
-            <img src={img} alt="random" />
+        <div className="card" onClick={() => setIsExpanded(!isExpanded)}>
+            <div className='image-container'>
+                <img src={img} alt="random" />
+            </div>
             <h2>{name}</h2>
-            <h3>{birthYear}</h3>
-            <h3>{deathYear}</h3>
-            <p>{text}</p>
-            <button className="play-audio" onClick={() => playAudio(audio)}>
+            <h3>Born: {birthYear}</h3>
+            <h3>Died: {deathYear}</h3>
+            <div className={`card-text ${isExpanded ? "expanded" : ""}`}>
+                <p>{text}</p>
+            </div>
+            <button className="play-audio" onClick={(event) => playAudio(event, audio)}>
                 <img src='./images/playsolid.svg'/>
             </button>
         </div>
