@@ -88,8 +88,8 @@ const formatDate = (date) => {
                     <label htmlFor="birth-year"><em>Born:</em></label>
                     <input 
                         id="birth-year" 
-                        type="date" 
-                        defaultValue={birthYear}  
+                        type="datetime-local" 
+                        defaultValue={formatDate(new Date())}  
                         onChange={(e) => setBirthYear(formatDate(e.target.value))}
                     />
                 </div>
@@ -98,8 +98,8 @@ const formatDate = (date) => {
                     <label htmlFor="death-year"><em>Died:</em></label>
                     <input 
                         id="death-year" 
-                        type="date" 
-                        defaultValue={deathYear}
+                        type="datetime-local" 
+                        defaultValue={formatDate(new Date())}
                         onChange={(e) => setDeathYear(formatDate(e.target.value))}
                     />
                 </div>
