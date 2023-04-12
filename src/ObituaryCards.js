@@ -31,13 +31,14 @@ function ObituaryCards({ cardsData, activeGetRequest }) {
     //maps over the cardsData array and creates a new array of CardItem components
     useEffect(() => {
         const newCards = cardsData.map((card) => {
+            const updatedImg = card.image_url.replace("/upload/", "/upload/e_art:zorro/");
             return (<CardItem
               key={card.id}
               name={card.name}
               birthYear={card.birth_year}
               deathYear={card.death_year}
               text={card.obituary_text}
-              img={card.image_url}
+              img={updatedImg}
               audio={card.audio_url}
               playAudio={playAudio}
             />);

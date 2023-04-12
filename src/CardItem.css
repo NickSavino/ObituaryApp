@@ -45,13 +45,12 @@
   @media (max-width: 670px) {
     .card {
       min-width: 80vw;
+      
     }
   }
   
   .card img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+    
   }
 
   .image-container {
@@ -59,6 +58,28 @@
     height: 300px;
     overflow: hidden;
     position: relative;
+    border-radius: 8px; 
+  }
+
+  
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease;
+    border-radius: 8px;
+  }
+
+  .image-container:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 150px rgba(0,0,0,.8) inset;
   }
   
   .card h2 {
@@ -112,3 +133,5 @@
    .card button:not(:hover) {
     transition: background-color 0.8s ease, color 0.2s ease, border 0.2s ease;
   }
+
+

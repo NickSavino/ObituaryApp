@@ -189,8 +189,11 @@ def upload_to_cloudinary(image_data, speech_data):
     speech_payload = create_payload("video", speech_data, api_key, secret_key)
     speech_response = requests.post(f"{cloudinary_url}/video/upload/", data=speech_payload)
 
+
+ 
     # Upload the image data
     image_payload = create_payload("image", image_data, api_key, secret_key)
+    print("IMAGE PAYLOAD ---")
     image_response = requests.post(f"{cloudinary_url}/image/upload/", data=image_payload)
     
     print("Image response content:", image_response)

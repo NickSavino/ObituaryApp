@@ -10,7 +10,7 @@ function CardItem({ name,  birthYear, deathYear, text, img, audio, playAudio}) {
     return (
         <div className="card" onClick={() => setIsExpanded(!isExpanded)}>
             <div className='image-container'>
-                <img src={img} alt="random" />
+                <img className='vignette' src={img} alt="random" />
             </div>
             <h2>{name}</h2>
             <h3>Born: {birthYear}</h3>
