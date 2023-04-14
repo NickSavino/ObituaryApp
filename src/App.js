@@ -83,11 +83,12 @@ function App() {
 
     const newCard = {
       name: responseData.name,
-      birthYear: responseData.birth_year,
-      deathYear: responseData.death_year,
-      text: responseData.obituary_text,
+      id: responseData.id,
+      birth_year: responseData.birth_year,
+      death_year: responseData.death_year,
+      obituary_text: responseData.obituary_text,
       image_url: responseData.image_url,
-      audio: responseData.audio_url,
+      audio_url: responseData.audio_url,
     }
     setCardsData([...cardsData, newCard]);
     
