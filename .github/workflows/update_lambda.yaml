@@ -52,7 +52,7 @@ jobs:
           code_path: ./artifact.zip
           aws_region: ca-central-1
           env: PROD
-          function_name: create_obituary
+          function_name: create-obituary-30129329
 
 
       #updates the lambda function
@@ -64,4 +64,4 @@ jobs:
           code_path: ./artifact.zip
           aws_region: ca-central-1
           env: PROD
-          function_name: get_obituaries
+          function_name: get-obituaries-30129329

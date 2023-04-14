@@ -24,7 +24,7 @@ function App() {
 
 
   async function fetchCards() {
-    const lambdaUrl = "https://l2xt23rtnklmdt2a36wh47azya0fyikx.lambda-url.ca-central-1.on.aws/"
+    const lambdaUrl = "https://23b5b4shl3opw2or2rjs7ordxq0mqpmw.lambda-url.ca-central-1.on.aws/"
 
     try {
       const response = await fetch(lambdaUrl, {
@@ -49,7 +49,7 @@ function App() {
 
 
   async function submitObituaryData (obituaryData) {
-    const url = "https://oadio4xsdvk5e7msjgft2gnhgy0aiggs.lambda-url.ca-central-1.on.aws/"
+    const url = "https://mvfkz6us2rcdghnjowx2qjt2vi0grrng.lambda-url.ca-central-1.on.aws/"
 
     const formData = new FormData();
 
@@ -80,6 +80,17 @@ function App() {
 
     const responseData = await response.json();
     console.log("Response Data: ", responseData);
+
+    const newCard = {
+      name: responseData.name,
+      birthYear: responseData.birth_year,
+      deathYear: responseData.death_year,
+      text: responseData.obituary_text,
+      image_url: responseData.image_url,
+      audio: responseData.audio_url,
+    }
+    setCardsData([...cardsData, newCard]);
+    
   } catch (error) {
     console.error("Error: ", error);
   }
@@ -90,12 +101,11 @@ function App() {
     console.log(event)
 
     // Submit the form
-    await submitObituaryData(event)
+    const responseData = await submitObituaryData(event)
     // Fetch the cards again
-    await fetchCards()
     // Close the form
     setIsFormOpen(false)
-
+    return responseData
   };
 
   const handleFormCancel = () => {

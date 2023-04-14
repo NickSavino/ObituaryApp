@@ -45,7 +45,8 @@ const formatDate = (date) => {
     }
 
     setFetching(true)
-    await onSubmit({ name, birthYear, deathYear, img })
+    const responseData = await onSubmit({ name, birthYear, deathYear, img })
+    
     setFetching(false)
   }
 
