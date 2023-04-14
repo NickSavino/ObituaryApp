@@ -152,6 +152,22 @@ resource "aws_lambda_function" "get-obituaries-30129329" {
   timeout = 20
 }
 
+#Policy for public access of lambda functions
+resource "aws_lambda_permission" "create_obituary_public" {
+  statement_id = "AllowPublicInvoke"
+  action      = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.create-obituary-30129329.function_name
+  principal = "*"
+}
+
+resource "aws_lambda_permission" "get_obituaries_public" {
+  statement_id = "AllowPublicInvoke"
+  action      = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get-obituaries-30129329.function_name
+  principal = "*"
+}
+  
+
 # create a policy for publishing logs to cloudwatch
 resource "aws_iam_policy" "logs" {
   name        = "lambda-logging-${local.lambda_group}"
