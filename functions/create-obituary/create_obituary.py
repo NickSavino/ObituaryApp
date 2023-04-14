@@ -102,7 +102,7 @@ def handler(event, context):
     audio_url = audio_response['secure_url']
 
     obituary_data['id'] = str(uuid.uuid4())
-    obituary_data['timestamp'] = int(time.time()),
+    obituary_data['timestamp'] = int(time.time())
 
 
     upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url)
