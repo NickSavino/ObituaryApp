@@ -102,6 +102,8 @@ def handler(event, context):
     audio_url = audio_response['secure_url']
 
     obituary_data['id'] = str(uuid.uuid4())
+    obituary_data['timestamp'] = int(time.time()),
+
 
     upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url)
 
@@ -110,6 +112,7 @@ def handler(event, context):
         "body": json.dumps({
             "message": "obituary created",
             "id": obituary_data['id'],
+            "timestamp": obituary_data['timestamp'],
             "name": obituary_data['name'],
             "birth_year": obituary_data['birthYear'],
             "death_year": obituary_data['deathYear'],
@@ -232,7 +235,7 @@ def upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url):
     # Create the item, using a UUID for the primary key
     item = {
         'id': obituary_data['id'],
-        "timestamp": int(time.time()),
+        "timestamp": obituary_data['timestamp'],
         'name': obituary_data['name'],
         'birth_year': obituary_data['birthYear'],
         'death_year': obituary_data['deathYear'],
