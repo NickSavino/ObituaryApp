@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "user" {
   statement {
     effect    = "Allow"
     actions   = ["lambda:UpdateFunctionCode", "s3:*"]
-    resources = ["${local.s3_arn}", "${local.s3_arn}/*", "${aws_lambda_function.create-obituary.arn}"]
+    resources = ["${local.s3_arn}", "${local.s3_arn}/*", "${aws_lambda_function.create-obituary-30129329.arn}", "${aws_lambda_function.get-obituaries-30129329.arn}"]
   }
 }
 
@@ -129,7 +129,7 @@ resource "aws_iam_role_policy_attachment" "lambda-polly-access" {
 
 
 #create-obituary lambda
-resource "aws_lambda_function" "create-obituary" {
+resource "aws_lambda_function" "create-obituary-30129329" {
   role          = aws_iam_role.lambda.arn
   function_name = local.create_obituaries_name
   handler       = local.create_obituaries_handler_name
@@ -141,7 +141,7 @@ resource "aws_lambda_function" "create-obituary" {
 }
 
 #get-obituaries lambda
-resource "aws_lambda_function" "get-obituaries" {
+resource "aws_lambda_function" "get-obituaries-30129329" {
   role          = aws_iam_role.lambda.arn
   function_name = local.get_obituaries_name
   handler       = local.get_obituaries_handler_name
@@ -183,7 +183,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
 # create a Function URL for create-obituary lambda 
 resource "aws_lambda_function_url" "create-obituary-url" {
-  function_name      = aws_lambda_function.create-obituary.function_name
+  function_name      = aws_lambda_function.create-obituary-30129329.function_name
   authorization_type = "NONE"
 
   cors {
@@ -202,7 +202,7 @@ output "create_url" {
 
 # Create a funciton url for get-obituaries lambda
 resource "aws_lambda_function_url" "get-obituaries-url" {
-  function_name      = aws_lambda_function.get-obituaries.function_name
+  function_name      = aws_lambda_function.get-obituaries-30129329.function_name
   authorization_type = "NONE"
 
   cors {
@@ -220,7 +220,7 @@ output "get_url" {
 }
 
 # create a dynamodb table
-resource "aws_dynamodb_table" "obituary-table" {
+resource "aws_dynamodb_table" "obituary-table-30129329" {
   name         = "obituary-table-30129329"
   billing_mode = "PROVISIONED"
 
@@ -253,7 +253,7 @@ data "aws_iam_policy_document" "dynamodb" {
     ]
 
     resources = [
-      aws_dynamodb_table.obituary-table.arn
+      aws_dynamodb_table.obituary-table-30129329.arn
     ]
   }
 }
