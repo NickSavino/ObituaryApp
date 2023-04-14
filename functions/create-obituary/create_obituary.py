@@ -232,6 +232,7 @@ def upload_to_dynamodb(obituary_data, obituary_text, image_url, audio_url):
     # Create the item, using a UUID for the primary key
     item = {
         'id': obituary_data['id'],
+        "timestamp": int(time.time()),
         'name': obituary_data['name'],
         'birth_year': obituary_data['birthYear'],
         'death_year': obituary_data['deathYear'],

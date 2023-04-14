@@ -20,6 +20,7 @@ def handler(event, context):
     for item in items:
         response_item = {
             'id': item['id']['S'],
+            'timestamp': item['timestamp']['S'],
             'name': item['name']['S'],
             'birth_year': item['birth_year']['S'],
             'death_year': item['death_year']['S'],
@@ -29,7 +30,9 @@ def handler(event, context):
         }
         response_items.append(response_item)
 
+    sorted_items = sorted(response_items, key=lambda x: x['timestamp'], reverse=True)
+
     return {
         'statusCode': 200,
-        'body': json.dumps(response_items)
+        'body': json.dumps(sorted_items)
     }

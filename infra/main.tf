@@ -231,10 +231,16 @@ resource "aws_dynamodb_table" "obituary-table" {
   write_capacity = 1
 
   hash_key = "id"
+  range_key = "timestamp"
 
   attribute {
     name = "id"
     type = "S"
+  }
+
+  attribute {
+    name = "timestamp"
+    type = "N"
   }
 }
 
