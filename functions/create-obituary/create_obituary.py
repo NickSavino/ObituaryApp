@@ -109,6 +109,7 @@ def handler(event, context):
         "statusCode": 200,
         "body": json.dumps({
             "message": "obituary created",
+            "id": obituary_data['id'],
             "name": obituary_data['name'],
             "birth_year": obituary_data['birthYear'],
             "death_year": obituary_data['deathYear'],
