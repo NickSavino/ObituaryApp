@@ -20,7 +20,7 @@ def handler(event, context):
     for item in items:
         response_item = {
             'id': item['id']['S'],
-            'timestamp': item['timestamp']['S'],
+            'timestamp': item['timestamp']['N'],
             'name': item['name']['S'],
             'birth_year': item['birth_year']['S'],
             'death_year': item['death_year']['S'],
