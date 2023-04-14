@@ -90,7 +90,7 @@ function App() {
       image_url: responseData.image_url,
       audio_url: responseData.audio_url,
     }
-    setCardsData([...cardsData, newCard]);
+    setCardsData([newCard, ...cardsData]);
     
   } catch (error) {
     console.error("Error: ", error);

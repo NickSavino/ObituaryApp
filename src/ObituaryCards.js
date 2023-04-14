@@ -14,12 +14,13 @@ function ObituaryCards({ cardsData, activeGetRequest }) {
         // Pause the current audio if it's playing
         event.stopPropagation();
 
+        if (currentAudio === null) {
+            setCurrentAudio(new Audio());
+        }
         if (currentAudio) {
             currentAudio.pause();
         }
-        if (currentAudio == null) {
-            currentAudio = new Audio();
-        }
+        
         // Create a new audio object and play it
         currentAudio.src = audio;
         currentAudio.play();
@@ -30,8 +31,9 @@ function ObituaryCards({ cardsData, activeGetRequest }) {
 
     //maps over the cardsData array and creates a new array of CardItem components
     useEffect(() => {
-        const newCards = cardsData.map((card) => {
+        const newCards = cardsData.map((card, index) => {
             const updatedImg = card.image_url.replace("/upload/", "/upload/e_art:zorro/");
+            const isFirstCard = index === 0;
             return (<CardItem
               key={card.id}
               name={card.name}
@@ -41,6 +43,7 @@ function ObituaryCards({ cardsData, activeGetRequest }) {
               img={updatedImg}
               audio={card.audio_url}
               playAudio={playAudio}
+              isOpen={isFirstCard}
             />);
         });
         setCards(newCards);

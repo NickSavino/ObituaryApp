@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './CardItem.css'
 
 
-function CardItem({ name,  birthYear, deathYear, text, img, audio, playAudio}) {
+function CardItem({ name,  birthYear, deathYear, text, img, audio, playAudio, isOpen }) {
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(isOpen);
 
-    useEffect(() => {
-        setIsExpanded(true);
-    }, []);
 
     return (
         <div className="card" onClick={() => setIsExpanded(!isExpanded)}>

@@ -8,6 +8,7 @@ function ObituaryForm({ onSubmit, onCancel }) {
   const [birthYear, setBirthYear] = useState("")
   const [deathYear, setDeathYear] = useState("")
   const [img, setImg] = useState("")
+  const [filename, setFilename] = useState("");
 
   const [fetching, setFetching] = useState(false)
 
@@ -52,6 +53,12 @@ const formatDate = (date) => {
 
   const handleImgChange = (event) => {
     setImg(event.target.files[0]);
+    if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        setFilename(file.name);
+      } else {
+        setFilename("");
+      }
   };
 
 
@@ -72,7 +79,7 @@ const formatDate = (date) => {
 
         <div className="form-group">
             
-            <label id='deceased-label' htmlFor="deceased-img-input"><em>Upload a photo of the deceased</em></label>
+            <label id='deceased-label' htmlFor="deceased-img-input"><em>Upload a photo of the deceased:  </em>  {filename}</label>
             <input 
                 type="file" 
                 id="deceased-img-input" 
